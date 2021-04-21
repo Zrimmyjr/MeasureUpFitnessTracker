@@ -78,7 +78,7 @@ if(isset($_SESSION['username'])){
 		    $result = $usr->selectIdQuery($sql, $challenger_username);
 			foreach ($result as $key =>$var)
 			$challenger_id = $var['id'];
-			$sql = "SELECT * FROM usersresults WHERE id = ? and event = ?;";
+			$sql = "SELECT * FROM usersresults WHERE id = ? AND event = ? AND isPublic = 'true';";
  			$result = $usr->selectIdEventQuery($sql, $challenger_id, $event);
 			?><div><?php $usr->display_data($result);?></div><?php
 	}
