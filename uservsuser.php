@@ -74,9 +74,12 @@ if(isset($_SESSION['username'])){
 		    $sql = "SELECT * FROM usersresults WHERE id = ? AND event = ?;";
 		    $result = $usr->selectIdEventQuery($sql, $id, $event);
 			?><div><?php $usr->display_data($result);?></div><?php
-		 $sql = "SELECT users.id, users.username, users.gender FROM users WHERE name = ?
-		 RIGHT JOIN usersresults ON users.id=usersresults.id;";
-		    $result = $usr->selectUsernameEventQuery($sql, $challenger_username, $event);
+			$sql = "SELECT id FROM users where username = ?";
+		    $result = $usr->selectIdQuery($sql, $challenger_username);
+			foreach ($result as $key =>$var)
+			$challenger_id = $var['id'];
+			$sql = "SELECT * FROM usersresults WHERE id = ? and event = ?;";
+ 			$result = $usr->selectIdEventQuery($sql, $challenger_id, $event);
 			?><div><?php $usr->display_data($result);?></div><?php
 	}
 }
